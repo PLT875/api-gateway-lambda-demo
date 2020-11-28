@@ -1,4 +1,4 @@
-package com.friend.demo;
+package com.friend.api;
 
 import com.amazonaws.services.lambda.runtime.Context;
 
