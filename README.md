@@ -1,1 +1,4 @@
-mvn clean package shade:shade
+
+```
+./mvnw clean package shade:shade
+```
