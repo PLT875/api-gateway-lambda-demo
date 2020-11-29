@@ -1,5 +1,6 @@
 package com.friend.api;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -25,7 +26,7 @@ public class MockedUserRepository implements UserRepository {
         User u1 = new User("u1", "mark", marksFriendRequests);
         users.put("u1", u1);
 
-        User u2 = new User("u2", "jack", null);
+        User u2 = new User("u2", "jack", Collections.emptyMap());
         users.put("u2", u2);
     }
 
