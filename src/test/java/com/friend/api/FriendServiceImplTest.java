@@ -7,14 +7,14 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
-public class FriendServiceTest {
+public class FriendServiceImplTest {
 
     private FriendService friendService;
 
     @Before
     public void setup() {
         UserRepository userRepository = new MockedUserRepository();
-        friendService = new FriendService(userRepository);
+        friendService = new FriendServiceImpl(userRepository);
     }
 
     @Test
