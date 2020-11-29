@@ -1,9 +1,6 @@
 package com.friend.api;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class MockedUserRepository implements UserRepository {
 
@@ -17,7 +14,6 @@ public class MockedUserRepository implements UserRepository {
         Map<String, String> johnsFriendRequests = new HashMap<>();
         johnsFriendRequests.put("u1", "pending");
         johnsFriendRequests.put("u2", "accepted");
-        johnsFriendRequests.put("u3", "rejected");
         User u0 = new User("u0", "john", johnsFriendRequests);
         users.put("u0", u0);
 
@@ -28,11 +24,19 @@ public class MockedUserRepository implements UserRepository {
 
         User u2 = new User("u2", "jack", Collections.emptyMap());
         users.put("u2", u2);
+
+        User u3 = new User("u3", "ben", Collections.emptyMap());
+        users.put("u3", u3);
     }
 
     @Override
     public Optional<User> getUser(String id) {
-        return Optional.ofNullable(users.get(id));
+        User user = users.get(id);
+        if (!Objects.isNull(user)) {
+            return Optional.of(User.copy(user));
+        }
+
+        return Optional.empty();
     }
 
     @Override
