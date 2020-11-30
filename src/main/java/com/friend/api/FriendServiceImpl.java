@@ -23,39 +23,42 @@ public class FriendServiceImpl implements FriendService {
         return friendRequest;
     }
 
-    public void addFriendRequest(String userId, String requestUserId) {
+    public void addFriendRequest(String userId, String senderUserId) {
         Optional<User> user = userRepository.getUser(userId);
-        Optional<User> requestUser = userRepository.getUser(requestUserId);
+        Optional<User> sender = userRepository.getUser(senderUserId);
 
-        if (user.isPresent() && requestUser.isPresent()) {
+        // TODO handle invalid users
+        if (user.isPresent() && sender.isPresent()) {
             Map<String, String> friendRequests = user.get().getFriendRequests();
-            if (!friendRequests.containsKey(requestUserId)) {
-                friendRequests.put(requestUserId, "pending");
+            if (!friendRequests.containsKey(senderUserId)) {
+                friendRequests.put(senderUserId, "pending");
                 userRepository.updateUser(user.get());
             }
         }
     }
 
-    public void updateFriendRequestState(String userId, String updateUserId, String state) {
+    public void updateFriendRequestState(String userId, String senderUserId, String state) {
         Optional<User> user = userRepository.getUser(userId);
-        Optional<User> requestUser = userRepository.getUser(updateUserId);
+        Optional<User> sender = userRepository.getUser(senderUserId);
 
-        if (user.isPresent() && requestUser.isPresent() && VALID_UPDATE_STATES.contains(state)) {
+        // TODO handle invalid users and states
+        if (user.isPresent() && sender.isPresent() && VALID_UPDATE_STATES.contains(state)) {
             Map<String, String> friendRequests = user.get().getFriendRequests();
-            if (friendRequests.containsKey(updateUserId)) {
-                friendRequests.put(updateUserId, state);
+            if (friendRequests.containsKey(senderUserId)) {
+                friendRequests.put(senderUserId, state);
                 userRepository.updateUser(user.get());
             }
         }
     }
 
-    public void deleteFriendRequest(String userId, String deleteUserId) {
+    public void deleteFriendRequest(String userId, String senderUserId) {
         Optional<User> user = userRepository.getUser(userId);
-        Optional<User> requestUser = userRepository.getUser(deleteUserId);
+        Optional<User> sender = userRepository.getUser(senderUserId);
 
-        if (user.isPresent() && requestUser.isPresent()) {
+        // TODO handle invalid users
+        if (user.isPresent() && sender.isPresent()) {
             Map<String, String> friendRequests = user.get().getFriendRequests();
-            friendRequests.remove(deleteUserId);
+            friendRequests.remove(senderUserId);
             userRepository.updateUser(user.get());
         }
     }
