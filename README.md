@@ -1,8 +1,11 @@
 # lambda-friend-demo
 
+Notes:
+* The App uses a mock database
+
 ### Package
 
-Package the app and upload the .jar to your already created Lambda
+Package the app and upload the .jar to your already created Lambdas
 ```
 ./mvnw clean package shade:shade
 ```
@@ -19,13 +22,15 @@ Unit tests
 Get friend requests (received) of a user
 ```
 GET /user/{id}/friendRequests 
-200 OK
-[
-    {
-        "senderId": "<senderId>",
-        "state": "<state>"
-    }
-]
+
+Response
+- 200 OK
+    [
+        {
+            "senderId": "<senderId>",
+            "state": "<state>"
+        }
+    ]
 ```
 
 e.g.
@@ -46,10 +51,14 @@ curl --location --request GET 'https://1kfao000mf.execute-api.eu-west-1.amazonaw
 Add friend request
 ```
 POST /user/{id}/friendRequest
-204 No Content
+
+Request body
 {
     "senderId": "<senderId>"
 }
+
+Response
+- 204 No Content
 ```
 
 e.g.
@@ -64,11 +73,15 @@ curl --location --request POST 'https://1kfao000mf.execute-api.eu-west-1.amazona
 Update friend request
 ```
 POST /user/{id}/friendRequest
-204 No Content
+
+Request body
 {
     "senderId": "<senderId>",
     "state": <state>
 }
+
+Response
+- 204 No Content
 ```
 
 e.g.
@@ -84,7 +97,9 @@ curl --location --request PUT 'https://1kfao000mf.execute-api.eu-west-1.amazonaw
 Delete friend request
 ```
 DELETE /user/{id}/friendRequest/{senderId}
-204 No Content
+
+Response
+- 204 No Content
 ```
 
 e.g.
@@ -118,6 +133,32 @@ Add friend request
     "body": "{\"senderId\":\"u2\"}",
     "path": "/user/{id}/friendRequest",
     "httpMethod": "POST",
+    "protocol": "HTTP/1.1"
+}
+```
+
+Edit friend request
+```
+{
+    "pathParameters": {
+        "id": "u0"
+    },
+    "body": "{\"senderId\":\"u2\",\"state\":\"rejected\"}}",
+    "path": "/user/{id}/friendRequest",
+    "httpMethod": "PUT",
+    "protocol": "HTTP/1.1"
+}
+```
+
+Delete friend request
+```
+{
+    "pathParameters": {
+        "id": "u0",
+        "senderId": "u2"
+    },
+    "path": "/user/{id}/friendRequest/{senderId}",
+    "httpMethod": "DELETE",
     "protocol": "HTTP/1.1"
 }
 ```
