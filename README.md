@@ -2,7 +2,13 @@
 
 Notes:
 * The App uses a mock database
-* Lambda should be configured to use Java 8
+* 4 Lambdas involved and their entry points
+    * GetFriendRequests (com.friend.api.DeleteFriendRequestHandler::handleRequest)
+    * AddFriendRequest (com.friend.api.AddFriendRequestHandler::handleRequest)
+    * UpdateFriendRequest (com.friend.api.UpdateFriendRequestHandler::handleRequest)
+    * DeleteFriendRequest (com.friend.api.DeleteFriendRequestHandler::handleRequest)
+    
+* Lambdas should be configured to use Java 8
 * Have tested both API gateway and Lambda integrations. Also see [screenshot](API_Gateway_Example.png)
 
 ### Package
