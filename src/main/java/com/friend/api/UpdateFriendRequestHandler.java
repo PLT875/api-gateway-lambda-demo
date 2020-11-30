@@ -10,6 +10,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * PUT /user/{id}/friendRequest
+ */
 public class UpdateFriendRequestHandler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
     private FriendService friendService;

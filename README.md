@@ -48,7 +48,7 @@ Add friend request
 POST /user/{id}/friendRequest
 204 No Content
 {
-    "senderId": "<id of user to send friend request>"
+    "senderId": "<senderId>"
 }
 ```
 
@@ -58,6 +58,26 @@ curl --location --request POST 'https://1kfao000mf.execute-api.eu-west-1.amazona
 --header 'Content-Type: application/json' \
 --data-raw '{
     "senderId": "u3"
+}'
+```
+
+Update friend request
+```
+POST /user/{id}/friendRequest
+204 No Content
+{
+    "senderId": "<senderId>",
+    "state": <state>
+}
+```
+
+e.g.
+```
+curl --location --request PUT 'https://1kfao000mf.execute-api.eu-west-1.amazonaws.com/dev/user/u0/friendRequest' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "senderId": "u1",
+    "state": "rejected"
 }'
 ```
 
