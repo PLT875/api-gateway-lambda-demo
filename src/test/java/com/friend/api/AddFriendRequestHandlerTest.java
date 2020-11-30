@@ -34,7 +34,7 @@ public class AddFriendRequestHandlerTest {
     @Test
     public void shouldReturn204() {
         when(mockRequestEvent.getPathParameters()).thenReturn(new HashMap<String, String>(){{ put("id", "u0"); }});
-        when(mockRequestEvent.getBody()).thenReturn("{\"id\":\"u3\"}");
+        when(mockRequestEvent.getBody()).thenReturn("{\"senderId\":\"u3\"}");
         APIGatewayProxyResponseEvent response = addFriendRequestHandler.handleRequest(mockRequestEvent, context);
         assertEquals(204, response.getStatusCode().longValue());
     }

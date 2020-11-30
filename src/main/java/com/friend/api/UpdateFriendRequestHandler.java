@@ -10,14 +10,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * POST /user/{id}/friendRequest
- */
-public class AddFriendRequestHandler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
+public class UpdateFriendRequestHandler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
     private FriendService friendService;
 
-    public AddFriendRequestHandler() {
+    public UpdateFriendRequestHandler () {
         friendService = new FriendServiceImpl(new MockedUserRepository());
     }
 
@@ -27,7 +24,7 @@ public class AddFriendRequestHandler implements RequestHandler<APIGatewayProxyRe
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             FriendRequest friendRequest = objectMapper.readValue(event.getBody(), FriendRequest.class);
-            friendService.addFriendRequest(pathParameters.get("id"), friendRequest.getSenderId());
+            friendService.updateFriendRequestState(pathParameters.get("id"), friendRequest.getSenderId(), friendRequest.getState());
 
             Map<String, String> headers = new HashMap<>();
             headers.put("Content-Type", "application/json");

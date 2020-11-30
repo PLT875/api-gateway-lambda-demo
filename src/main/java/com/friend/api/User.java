@@ -1,22 +1,20 @@
 package com.friend.api;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Data
 @AllArgsConstructor
-@Getter
-@Setter
 public class User {
 
     private String id;
 
     private String name;
 
-    // friend requests sent to another user and current state
+    // friend requests (received)
     private Map<String, String> friendRequests;
 
     /**

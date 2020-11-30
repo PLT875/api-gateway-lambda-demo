@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class FriendRequest {
 
-    @JsonProperty("id")
-    private String id;
+    @JsonProperty("senderId")
+    private String senderId;
 
     @JsonProperty("state")
     private String state;

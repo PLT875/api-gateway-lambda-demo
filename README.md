@@ -16,13 +16,13 @@ Unit tests
 
 ### Endpoints
 
-Get friend requests
+Get friend requests (received) of a user
 ```
 GET /user/{id}/friendRequests 
 200 OK
 [
     {
-        "id": "<id of user of sent friend request>",
+        "senderId": "<senderId>",
         "state": "<state>"
     }
 ]
@@ -32,16 +32,15 @@ e.g.
 ```
 curl --location --request GET 'https://1kfao000mf.execute-api.eu-west-1.amazonaws.com/dev/user/u0/friendRequests' --header 'Content-Type: application/json' | json_pp
 [
-   {
-      "id": "u1",
-      "state": "pending"
-   },
-   {
-      "state": "accepted",
-      "id": "u2"
-   }
+    {
+        "senderId": "u1",
+        "state": "pending"
+    },
+    {
+        "senderId": "u2",
+        "state": "accepted",  
+    }
 ]
-
 ```
 
 Add friend request
@@ -49,7 +48,7 @@ Add friend request
 POST /user/{id}/friendRequest
 204 No Content
 {
-    "id": "<id of user to send friend request>"
+    "senderId": "<id of user to send friend request>"
 }
 ```
 
@@ -58,7 +57,7 @@ e.g.
 curl --location --request POST 'https://1kfao000mf.execute-api.eu-west-1.amazonaws.com/dev/user/u0/friendRequest' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-    "id": "u3"
+    "senderId": "u3"
 }'
 ```
 
@@ -69,24 +68,24 @@ Based on the "Amazon API Gateway AWS Proxy" template
 Get friend requests
 ```
 {
-  "pathParameters": {
-    "id": "u1"
-  },
-  "path": "/user/{id}/friendRequests",
-  "httpMethod": "GET",
-  "protocol": "HTTP/1.1"
+    "pathParameters": {
+        "id": "u1"
+    },
+    "path": "/user/{id}/friendRequests",
+    "httpMethod": "GET",
+    "protocol": "HTTP/1.1"
 }
 ```
 
 Add friend request
 ```
 {
-  "pathParameters": {
-    "id": "u0"
-  },
-  "body": "{\"id\":\"u2\"}",
-  "path": "/user/{id}/friendRequest",
-  "httpMethod": "POST",
-  "protocol": "HTTP/1.1"
+    "pathParameters": {
+        "id": "u0"
+    },
+    "body": "{\"senderId\":\"u2\"}",
+    "path": "/user/{id}/friendRequest",
+    "httpMethod": "POST",
+    "protocol": "HTTP/1.1"
 }
 ```

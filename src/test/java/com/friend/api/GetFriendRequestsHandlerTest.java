@@ -38,7 +38,7 @@ public class GetFriendRequestsHandlerTest {
         APIGatewayProxyResponseEvent response = getFriendRequestsHandler.handleRequest(mockRequestEvent, context);
         assertEquals("application/json", response.getHeaders().get("Content-Type"));
         assertEquals(200, response.getStatusCode().longValue());
-        assertEquals("[{\"id\":\"u1\",\"state\":\"pending\"},{\"id\":\"u2\",\"state\":\"accepted\"}]", response.getBody());
+        assertEquals("[{\"senderId\":\"u1\",\"state\":\"pending\"},{\"senderId\":\"u2\",\"state\":\"accepted\"}]", response.getBody());
     }
 
     @Test
