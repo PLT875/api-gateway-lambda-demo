@@ -17,6 +17,8 @@ public class GetFriendRequestsHandlerTest {
 
     private GetFriendRequestsHandler getFriendRequestsHandler;
 
+    // @Mock private FriendService
+
     @Mock
     private APIGatewayProxyRequestEvent mockRequestEvent;
 
