@@ -14,8 +14,6 @@ import java.util.stream.Collectors;
 
 /**
  * GET /user/{id}/friendRequests
- *
- * Uses Lambda proxy integration
  */
 public class GetFriendRequestsHandler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
@@ -48,11 +46,11 @@ public class GetFriendRequestsHandler implements RequestHandler<APIGatewayProxyR
         }
     }
 
-    private List<FriendRequestResponse> toResponseBody(Map<String, String> friendRequest) {
+    private List<FriendRequest> toResponseBody(Map<String, String> friendRequest) {
         return friendRequest
                 .entrySet()
                 .stream()
-                .map(f -> new FriendRequestResponse(f.getKey(), f.getValue()))
+                .map(f -> new FriendRequest(f.getKey(), f.getValue()))
                 .collect(Collectors.toList());
     }
 }

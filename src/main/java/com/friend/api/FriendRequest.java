@@ -13,4 +13,6 @@ public class FriendRequest {
     @JsonProperty("id")
     private String id;
 
+    @JsonProperty("state")
+    private String state;
 }
