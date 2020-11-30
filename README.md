@@ -2,6 +2,7 @@
 
 Notes:
 * The App uses a mock database
+* Lambda should be configured to use Java 8
 * Have tested both API gateway and Lambda integrations. Also see [screenshot](API_Gateway_Example.png)
 
 ### Package
