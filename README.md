@@ -3,7 +3,7 @@
 Notes:
 * The App uses a mock database
 * 4 Lambdas involved and their entry points
-    * GetFriendRequests (com.friend.api.DeleteFriendRequestHandler::handleRequest)
+    * GetFriendRequests (com.friend.api.GetFriendRequestsHandler::handleRequest)
     * AddFriendRequest (com.friend.api.AddFriendRequestHandler::handleRequest)
     * UpdateFriendRequest (com.friend.api.UpdateFriendRequestHandler::handleRequest)
     * DeleteFriendRequest (com.friend.api.DeleteFriendRequestHandler::handleRequest)
