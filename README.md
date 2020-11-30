@@ -81,6 +81,18 @@ curl --location --request PUT 'https://1kfao000mf.execute-api.eu-west-1.amazonaw
 }'
 ```
 
+Delete friend request
+```
+DELETE /user/{id}/friendRequest/{senderId}
+204 No Content
+```
+
+e.g.
+```
+curl --location --request DELETE 'https://1kfao000mf.execute-api.eu-west-1.amazonaws.com/dev/user/u0/friendRequest/u2' \
+--header 'Content-Type: application/json'
+```
+
 ### Lambda black box tests
 
 Based on the "Amazon API Gateway AWS Proxy" template
