@@ -16,14 +16,14 @@ import java.util.Map;
 @DynamoDBTable(tableName = "user")
 public class User {
 
-    @DynamoDBHashKey
+    @DynamoDBHashKey(attributeName = "id")
     private String id;
 
-    @DynamoDBAttribute
+    @DynamoDBAttribute(attributeName = "name")
     private String name;
 
     // friend requests (received)
-    @DynamoDBAttribute
+    @DynamoDBAttribute(attributeName = "friendRequests")
     private Map<String, String> friendRequests;
 
     /**

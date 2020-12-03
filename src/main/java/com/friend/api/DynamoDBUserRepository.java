@@ -25,6 +25,6 @@ public class DynamoDBUserRepository implements UserRepository {
 
     @Override
     public void updateUser(User user) {
-
+        dynamoDBMapper.save(user);
     }
 }

@@ -29,10 +29,12 @@ public class FriendServiceImpl implements FriendService {
 
         // TODO handle invalid users
         if (user.isPresent() && sender.isPresent()) {
-            Map<String, String> friendRequests = user.get().getFriendRequests();
+            User userUpdate = user.get();
+            Map<String, String> friendRequests = userUpdate.getFriendRequests();
+
             if (!friendRequests.containsKey(senderUserId)) {
                 friendRequests.put(senderUserId, "pending");
-                userRepository.updateUser(user.get());
+                userRepository.updateUser(userUpdate);
             }
         }
     }

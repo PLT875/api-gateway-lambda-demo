@@ -19,7 +19,7 @@ public class GetFriendRequestsHandlerTest {
     private GetFriendRequestsHandler getFriendRequestsHandler;
 
     @Mock
-    private FriendService friendService;
+    private FriendService mockFriendService;
 
     @Mock
     private APIGatewayProxyRequestEvent mockRequestEvent;
@@ -30,13 +30,13 @@ public class GetFriendRequestsHandlerTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        getFriendRequestsHandler = new GetFriendRequestsHandler(friendService);
+        getFriendRequestsHandler = new GetFriendRequestsHandler(mockFriendService);
     }
 
     @Test
     public void shouldReturn200AndFriendRequests() {
         when(mockRequestEvent.getPathParameters()).thenReturn(new HashMap<String, String>(){{ put("id", "u0"); }});
-        when(friendService.getFriendRequests("u0")).thenReturn(new HashMap<String, String>(){{
+        when(mockFriendService.getFriendRequests("u0")).thenReturn(new HashMap<String, String>(){{
             put("u1", "pending");
             put("u2", "accepted");
         }});
@@ -50,7 +50,7 @@ public class GetFriendRequestsHandlerTest {
     @Test
     public void shouldReturn200AndEmptyIfNoFriendRequests() {
         when(mockRequestEvent.getPathParameters()).thenReturn(new HashMap<String, String>(){{ put("id", "u2"); }});
-        when(friendService.getFriendRequests("u0")).thenReturn(Collections.emptyMap());
+        when(mockFriendService.getFriendRequests("u0")).thenReturn(Collections.emptyMap());
 
         APIGatewayProxyResponseEvent response = getFriendRequestsHandler.handleRequest(mockRequestEvent, context);
         assertEquals("application/json", response.getHeaders().get("Content-Type"));
