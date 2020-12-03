@@ -1,20 +1,29 @@
 package com.friend.api;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Data;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
+@DynamoDBTable(tableName = "user")
 public class User {
 
+    @DynamoDBHashKey
     private String id;
 
+    @DynamoDBAttribute
     private String name;
 
     // friend requests (received)
+    @DynamoDBAttribute
     private Map<String, String> friendRequests;
 
     /**
