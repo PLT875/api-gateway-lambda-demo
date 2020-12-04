@@ -2,6 +2,8 @@ package com.friend.api;
 
 import java.util.*;
 
+import static java.util.Objects.isNull;
+
 public class FriendServiceImpl implements FriendService {
 
     private UserRepository userRepository;
@@ -17,7 +19,9 @@ public class FriendServiceImpl implements FriendService {
         Optional<User> user = userRepository.getUser(userId);
 
         if (user.isPresent()) {
-            return user.get().getFriendRequests();
+            if (!isNull(user.get().getFriendRequests())) {
+                return user.get().getFriendRequests();
+            }
         }
 
         return friendRequest;
