@@ -1,4 +1,4 @@
-# lambda-friend-demo
+# api-gateway-lambda-demo
 
 Notes:
 * The App uses a mock database
