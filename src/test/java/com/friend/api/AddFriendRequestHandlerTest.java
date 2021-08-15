@@ -11,13 +11,14 @@ import org.mockito.MockitoAnnotations;
 import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class AddFriendRequestHandlerTest {
 
     private AddFriendRequestHandler addFriendRequestHandler;
 
-    // @Mock private FriendService
+    @Mock
+    private FriendService mockFriendService;
 
     @Mock
     private APIGatewayProxyRequestEvent mockRequestEvent;
@@ -28,7 +29,7 @@ public class AddFriendRequestHandlerTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        addFriendRequestHandler = new AddFriendRequestHandler();
+        addFriendRequestHandler = new AddFriendRequestHandler(mockFriendService);
     }
 
     @Test
@@ -37,6 +38,7 @@ public class AddFriendRequestHandlerTest {
         when(mockRequestEvent.getBody()).thenReturn("{\"senderId\":\"u3\"}");
         APIGatewayProxyResponseEvent response = addFriendRequestHandler.handleRequest(mockRequestEvent, context);
         assertEquals(204, response.getStatusCode().longValue());
+        verify(mockFriendService).addFriendRequest("u0", "u3");
     }
 
 }

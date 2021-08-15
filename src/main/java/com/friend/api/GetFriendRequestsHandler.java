@@ -7,9 +7,7 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -19,8 +17,12 @@ public class GetFriendRequestsHandler implements RequestHandler<APIGatewayProxyR
 
     private FriendService friendService;
 
+    public GetFriendRequestsHandler(FriendService friendService) {
+        this.friendService = friendService;
+    }
+
     public GetFriendRequestsHandler() {
-        friendService = new FriendServiceImpl(new MockedUserRepository());
+        friendService = new FriendServiceImpl(new DynamoDBUserRepository());
     }
 
     @Override

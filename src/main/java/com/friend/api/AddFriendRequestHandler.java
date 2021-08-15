@@ -17,8 +17,12 @@ public class AddFriendRequestHandler implements RequestHandler<APIGatewayProxyRe
 
     private FriendService friendService;
 
+    public AddFriendRequestHandler(FriendService friendService) {
+        this.friendService = friendService;
+    }
+
     public AddFriendRequestHandler() {
-        friendService = new FriendServiceImpl(new MockedUserRepository());
+        friendService = new FriendServiceImpl(new DynamoDBUserRepository());
     }
 
     @Override

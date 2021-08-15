@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.Collections;
 import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
@@ -17,7 +18,8 @@ public class GetFriendRequestsHandlerTest {
 
     private GetFriendRequestsHandler getFriendRequestsHandler;
 
-    // @Mock private FriendService
+    @Mock
+    private FriendService mockFriendService;
 
     @Mock
     private APIGatewayProxyRequestEvent mockRequestEvent;
@@ -28,12 +30,16 @@ public class GetFriendRequestsHandlerTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        getFriendRequestsHandler = new GetFriendRequestsHandler();
+        getFriendRequestsHandler = new GetFriendRequestsHandler(mockFriendService);
     }
 
     @Test
     public void shouldReturn200AndFriendRequests() {
         when(mockRequestEvent.getPathParameters()).thenReturn(new HashMap<String, String>(){{ put("id", "u0"); }});
+        when(mockFriendService.getFriendRequests("u0")).thenReturn(new HashMap<String, String>(){{
+            put("u1", "pending");
+            put("u2", "accepted");
+        }});
 
         APIGatewayProxyResponseEvent response = getFriendRequestsHandler.handleRequest(mockRequestEvent, context);
         assertEquals("application/json", response.getHeaders().get("Content-Type"));
@@ -44,12 +50,12 @@ public class GetFriendRequestsHandlerTest {
     @Test
     public void shouldReturn200AndEmptyIfNoFriendRequests() {
         when(mockRequestEvent.getPathParameters()).thenReturn(new HashMap<String, String>(){{ put("id", "u2"); }});
+        when(mockFriendService.getFriendRequests("u0")).thenReturn(Collections.emptyMap());
 
         APIGatewayProxyResponseEvent response = getFriendRequestsHandler.handleRequest(mockRequestEvent, context);
         assertEquals("application/json", response.getHeaders().get("Content-Type"));
         assertEquals(200, response.getStatusCode().longValue());
         assertEquals("[]", response.getBody());
     }
-
 
 }
