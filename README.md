@@ -1,4 +1,4 @@
-# api-gateway-lambda-demo
+# api-gateway-lambda-demo (archived)
 
 Notes:
 * The App uses a mock database
@@ -43,7 +43,7 @@ Response
 
 e.g.
 ```
-curl --location --request GET 'https://1kfao000mf.execute-api.eu-west-1.amazonaws.com/dev/user/u0/friendRequests' --header 'Content-Type: application/json' | json_pp
+curl --location --request GET 'https://<domain>/dev/user/u0/friendRequests' --header 'Content-Type: application/json' | json_pp
 [
     {
         "senderId": "u1",
@@ -71,7 +71,7 @@ Response
 
 e.g.
 ```
-curl --location --request POST 'https://1kfao000mf.execute-api.eu-west-1.amazonaws.com/dev/user/u0/friendRequest' \
+curl --location --request POST 'https://<domain>/dev/user/u0/friendRequest' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "senderId": "u3"
@@ -94,7 +94,7 @@ Response
 
 e.g.
 ```
-curl --location --request PUT 'https://1kfao000mf.execute-api.eu-west-1.amazonaws.com/dev/user/u0/friendRequest' \
+curl --location --request PUT 'https://<domain>/dev/user/u0/friendRequest' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "senderId": "u1",
@@ -112,7 +112,7 @@ Response
 
 e.g.
 ```
-curl --location --request DELETE 'https://1kfao000mf.execute-api.eu-west-1.amazonaws.com/dev/user/u0/friendRequest/u2' \
+curl --location --request DELETE 'https://<domain>/dev/user/u0/friendRequest/u2' \
 --header 'Content-Type: application/json'
 ```
 
